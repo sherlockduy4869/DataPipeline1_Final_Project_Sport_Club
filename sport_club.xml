@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<CLUB>
+
+    <TEAMS>
+        <TEAM>
+            <!-- <LEVEL>
+
+            </LEVEL>
+            <SPORT>
+
+            </SPORT> -->
+
+            <COACHEREF>
+
+            </COACHEREF>
+            <MEMBERS>
+                <MEMBER>
+                    <MEMBERSHIPS>
+
+                    </MEMBERSHIPS>
+                </MEMBER>
+            </MEMBERS>
+        </TEAM>
+    </TEAMS>
+
+    <COACHES>
+        <COACHE>
+
+        </COACHE>
+    </COACHES>
+
+    <TRAININGSESSIONS>
+
+        <TRAININGSESSION>
+            <TEAMREF>
+            
+            </TEAMREF>
+    
+            <FACILITIES>
+    
+            </FACILITIES>
+    
+            <EQUIPMENT>
+    
+            </EQUIPMENT>
+        </TRAININGSESSION>
+
+    </TRAININGSESSIONS>
+
+    <COMPETITIONS>
+        <COMPETITION>
+            <TEAMREF>
+            
+            </TEAMREF>
+        </COMPETITION>
+    </COMPETITIONS>
+
+    <BOOKINGS>
+        <BOOKING>
+            <TRAININGSESISONREF>
+
+            </TRAININGSESISONREF>
+        </BOOKING>
+    </BOOKINGS>
+</CLUB>
