@@ -1,237 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="./senarios/senario_1.xsl"?>
-<CLUB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="sport_club.xsd">
 
-    <TEAMS>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-        <TEAM>
-            <ID>1</ID>
-            <COACHID>1</COACHID>
-            <NAME>Team A</NAME>
-            <MEMBERS>
-                <MEMBER><ID>1</ID><NAME>Duy</NAME><AGE>18</AGE><EMAIL>duy1@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>2</ID><NAME>Linh</NAME><AGE>19</AGE><EMAIL>linh1@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>3</ID><NAME>Quan</NAME><AGE>20</AGE><EMAIL>quan1@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>4</ID><NAME>Nam</NAME><AGE>21</AGE><EMAIL>nam1@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>5</ID><NAME>Huy</NAME><AGE>22</AGE><EMAIL>huy1@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>6</ID><NAME>An</NAME><AGE>20</AGE><EMAIL>an1@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-            </MEMBERS>
-        </TEAM>
+    <!-- ROOT -->
+    <xs:element name="CLUB">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TEAMS" type="TeamsType"/>
+                <xs:element name="COACHES" type="CoachesType"/>
+                <xs:element name="TRAININGSESSIONS" type="TrainingSessionsType"/>
+                <xs:element name="FACILITIES" type="FacilitiesType"/>
+                <xs:element name="COMPETITIONS" type="CompetitionsType"/>
+                <xs:element name="BOOKINGS" type="BookingsType"/>
+            </xs:sequence>
+        </xs:complexType>
 
-        <TEAM>
-            <ID>2</ID>
-            <COACHID>2</COACHID>
-            <NAME>Team B</NAME>
-            <MEMBERS>
-                <MEMBER><ID>7</ID><NAME>Minh</NAME><AGE>18</AGE><EMAIL>minh2@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>8</ID><NAME>Long</NAME><AGE>19</AGE><EMAIL>long2@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>9</ID><NAME>Khanh</NAME><AGE>20</AGE><EMAIL>khanh2@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>10</ID><NAME>Tuan</NAME><AGE>21</AGE><EMAIL>tuan2@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>11</ID><NAME>Phong</NAME><AGE>22</AGE><EMAIL>phong2@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>12</ID><NAME>Dat</NAME><AGE>23</AGE><EMAIL>dat2@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-            </MEMBERS>
-        </TEAM>
+        <!-- KEYS -->
+        <xs:key name="teamKey">
+            <xs:selector xpath="TEAMS/TEAM"/>
+            <xs:field xpath="ID"/>
+        </xs:key>
 
-        <TEAM>
-            <ID>3</ID>
-            <COACHID>3</COACHID>
-            <NAME>Team C</NAME>
-            <MEMBERS>
-                <MEMBER><ID>13</ID><NAME>Hoa</NAME><AGE>18</AGE><EMAIL>hoa3@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>14</ID><NAME>Lan</NAME><AGE>19</AGE><EMAIL>lan3@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>15</ID><NAME>Mai</NAME><AGE>20</AGE><EMAIL>mai3@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>16</ID><NAME>Trang</NAME><AGE>21</AGE><EMAIL>trang3@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>17</ID><NAME>Ngoc</NAME><AGE>22</AGE><EMAIL>ngoc3@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>18</ID><NAME>Vy</NAME><AGE>20</AGE><EMAIL>vy3@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-            </MEMBERS>
-        </TEAM>
+        <xs:key name="coachKey">
+            <xs:selector xpath="COACHES/COACH"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
 
-        <TEAM>
-            <ID>4</ID>
-            <COACHID>4</COACHID>
-            <NAME>Team D</NAME>
-            <MEMBERS>
-                <MEMBER><ID>19</ID><NAME>Son</NAME><AGE>21</AGE><EMAIL>son4@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>20</ID><NAME>Hai</NAME><AGE>22</AGE><EMAIL>hai4@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>21</ID><NAME>Binh</NAME><AGE>23</AGE><EMAIL>binh4@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>22</ID><NAME>Hung</NAME><AGE>20</AGE><EMAIL>hung4@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>23</ID><NAME>Duc</NAME><AGE>21</AGE><EMAIL>duc4@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
-                <MEMBER><ID>24</ID><NAME>Toan</NAME><AGE>22</AGE><EMAIL>toan4@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
-            </MEMBERS>
-        </TEAM>
+        <xs:key name="facilityKey">
+            <xs:selector xpath="FACILITIES/FACILITY"/>
+            <xs:field xpath="ID"/>
+        </xs:key>
 
-    </TEAMS>
+        <xs:key name="trainingKey">
+            <xs:selector xpath="TRAININGSESSIONS/TRAININGSESSION"/>
+            <xs:field xpath="ID"/>
+        </xs:key>
 
-    <COACHES>
-        <COACH><ID>1</ID><NAME>Vu Anh</NAME><SPECIALTY>Football</SPECIALTY></COACH>
-        <COACH><ID>2</ID><NAME>Anh Vu</NAME><SPECIALTY>Basketball</SPECIALTY></COACH>
-        <COACH><ID>3</ID><NAME>Nguyen Hai</NAME><SPECIALTY>Volleyball</SPECIALTY></COACH>
-        <COACH><ID>4</ID><NAME>Tran Minh</NAME><SPECIALTY>Tennis</SPECIALTY></COACH>
-        <COACH><ID>5</ID><NAME>Le Hoang</NAME><SPECIALTY>Swimming</SPECIALTY></COACH>
-        <COACH><ID>6</ID><NAME>Pham Long</NAME><SPECIALTY>Running</SPECIALTY></COACH>
-        <COACH><ID>7</ID><NAME>Doan Kiet</NAME><SPECIALTY>Gym</SPECIALTY></COACH>
-        <COACH><ID>8</ID><NAME>Hoang Nam</NAME><SPECIALTY>Boxing</SPECIALTY></COACH>
-        <COACH><ID>9</ID><NAME>Vu Linh</NAME><SPECIALTY>Yoga</SPECIALTY></COACH>
-        <COACH><ID>10</ID><NAME>Dang Phuc</NAME><SPECIALTY>Badminton</SPECIALTY></COACH>
-    </COACHES>
+        <!-- FOREIGN KEYS -->
+        <xs:keyref name="teamCoachRef" refer="coachKey">
+            <xs:selector xpath="TEAMS/TEAM"/>
+            <xs:field xpath="MES/@idref"/>
+        </xs:keyref>
 
-    <TRAININGSESSIONS>
+        <xs:keyref name="trainingTeamRef" refer="teamKey">
+            <xs:selector xpath="TRAININGSESSIONS/TRAININGSESSION"/>
+            <xs:field xpath="TEAMID"/>
+        </xs:keyref>
 
-        <TRAININGSESSION>
-            <ID>1</ID>
-            <TEAMID>1</TEAMID>
-            <FACILITYID>1</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Football</EQUIPMENT>
-                <EQUIPMENT>Goal Net</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-25T08:00:00</TIME>
-        </TRAININGSESSION>
+        <xs:keyref name="trainingFacilityRef" refer="facilityKey">
+            <xs:selector xpath="TRAININGSESSIONS/TRAININGSESSION"/>
+            <xs:field xpath="FACILITYID"/>
+        </xs:keyref>
 
-        <TRAININGSESSION>
-            <ID>2</ID>
-            <TEAMID>2</TEAMID>
-            <FACILITYID>2</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Dumbbells</EQUIPMENT>
-                <EQUIPMENT>Yoga Mat</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-26T10:00:00</TIME>
-        </TRAININGSESSION>
+        <xs:keyref name="bookingTrainingRef" refer="trainingKey">
+            <xs:selector xpath="BOOKINGS/BOOKING"/>
+            <xs:field xpath="TRAININGSESSIONID"/>
+        </xs:keyref>
 
-        <TRAININGSESSION>
-            <ID>3</ID>
-            <TEAMID>3</TEAMID>
-            <FACILITYID>3</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Swim Gear</EQUIPMENT>
-                <EQUIPMENT>Kickboard</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-27T07:00:00</TIME>
-        </TRAININGSESSION>
+        <xs:keyref name="competitionTeamRef" refer="teamKey">
+            <xs:selector xpath="COMPETITIONS/COMPETITION"/>
+            <xs:field xpath="TEAMID"/>
+        </xs:keyref>
 
-        <TRAININGSESSION>
-            <ID>4</ID>
-            <TEAMID>4</TEAMID>
-            <FACILITYID>4</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Basketball</EQUIPMENT>
-                <EQUIPMENT>Hoop</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-28T09:00:00</TIME>
-        </TRAININGSESSION>
+    </xs:element>
 
-        <TRAININGSESSION>
-            <ID>5</ID>
-            <TEAMID>1</TEAMID>
-            <FACILITYID>5</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Treadmill</EQUIPMENT>
-                <EQUIPMENT>Weights</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-29T18:00:00</TIME>
-        </TRAININGSESSION>
+    <!-- TEAMS -->
+    <xs:complexType name="TeamsType">
+        <xs:sequence>
+            <xs:element name="TEAM" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID" type="xs:int"/>
 
-        <TRAININGSESSION>
-            <ID>6</ID>
-            <TEAMID>2</TEAMID>
-            <FACILITYID>6</FACILITYID>
-            <EQUIPMENTS>
-                <EQUIPMENT>Badminton Racket</EQUIPMENT>
-                <EQUIPMENT>Shuttlecock</EQUIPMENT>
-            </EQUIPMENTS>
-            <TIME>2026-03-30T16:00:00</TIME>
-        </TRAININGSESSION>
+                        <!-- MES replaces COACHID -->
+                        <xs:element name="MES">
+                            <xs:complexType>
+                                <xs:attribute name="idref" type="xs:int" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
 
-    </TRAININGSESSIONS>
+                        <xs:element name="NAME" type="xs:string"/>
 
-    <FACILITIES>
-        <FACILITY><ID>1</ID><NAME>Stadium A</NAME><LOCATION>Hanoi</LOCATION><CAPACITY>500</CAPACITY></FACILITY>
-        <FACILITY><ID>2</ID><NAME>Gym B</NAME><LOCATION>Ho Chi Minh City</LOCATION><CAPACITY>200</CAPACITY></FACILITY>
-        <FACILITY><ID>3</ID><NAME>Pool C</NAME><LOCATION>Da Nang</LOCATION><CAPACITY>150</CAPACITY></FACILITY>
-        <FACILITY><ID>4</ID><NAME>Arena D</NAME><LOCATION>Hai Phong</LOCATION><CAPACITY>400</CAPACITY></FACILITY>
-        <FACILITY><ID>5</ID><NAME>Fitness Center E</NAME><LOCATION>Can Tho</LOCATION><CAPACITY>180</CAPACITY></FACILITY>
-        <FACILITY><ID>6</ID><NAME>Sports Hall F</NAME><LOCATION>Nha Trang</LOCATION><CAPACITY>300</CAPACITY></FACILITY>
-    </FACILITIES>
+                        <xs:element name="MEMBERS">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="MEMBER" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="ID" type="xs:int"/>
+                                                <xs:element name="NAME" type="xs:string"/>
+                                                <xs:element name="AGE" minOccurs="0">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:int">
+                                                            <xs:minInclusive value="15"/>
+                                                            <xs:maxInclusive value="60"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
+                                                <xs:element name="EMAIL" type="xs:string"/>
+                                                <xs:element name="MEMBERSHIPS">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="GOLD"/>
+                                                            <xs:enumeration value="SILVER"/>
+                                                            <xs:enumeration value="BRONZE"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
 
-    <COMPETITIONS>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-        <COMPETITION>
-            <ID>1</ID>
-            <NAME>Summer Cup</NAME>
-            <DATE>2026-06-01</DATE>
-            <TEAMID>1</TEAMID>
-        </COMPETITION>
+    <!-- COACHES -->
+    <xs:complexType name="CoachesType">
+        <xs:sequence>
+            <xs:element name="COACH" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NAME" type="xs:string"/>
+                        <xs:element name="SPECIALTY" type="xs:string"/>
+                    </xs:sequence>
+                    <!-- ID as attribute -->
+                    <xs:attribute name="id" type="xs:int" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-        <COMPETITION>
-            <ID>2</ID>
-            <NAME>Autumn League</NAME>
-            <DATE>2026-09-15</DATE>
-            <TEAMID>2</TEAMID>
-        </COMPETITION>
+    <!-- FACILITIES -->
+    <xs:complexType name="FacilitiesType">
+        <xs:sequence>
+            <xs:element name="FACILITY" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID" type="xs:int"/>
+                        <xs:element name="NAME" type="xs:string"/>
+                        <xs:element name="LOCATION" type="xs:string"/>
+                        <xs:element name="CAPACITY" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-        <COMPETITION>
-            <ID>3</ID>
-            <NAME>Winter Cup</NAME>
-            <DATE>2026-12-01</DATE>
-            <TEAMID>3</TEAMID>
-        </COMPETITION>
+    <!-- TRAINING -->
+    <xs:complexType name="TrainingSessionsType">
+        <xs:sequence>
+            <xs:element name="TRAININGSESSION" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID" type="xs:int"/>
+                        <xs:element name="TEAMID" type="xs:int"/>
+                        <xs:element name="FACILITYID" type="xs:int"/>
+                        <xs:element name="EQUIPMENTS">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="EQUIPMENT" type="xs:string" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="TIME" type="xs:dateTime"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-        <COMPETITION>
-            <ID>4</ID>
-            <NAME>Spring Tournament</NAME>
-            <DATE>2026-04-10</DATE>
-            <TEAMID>4</TEAMID>
-        </COMPETITION>
+    <!-- COMPETITIONS -->
+    <xs:complexType name="CompetitionsType">
+        <xs:sequence>
+            <xs:element name="COMPETITION" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID" type="xs:int"/>
+                        <xs:element name="NAME" type="xs:string"/>
+                        <xs:element name="DATE" type="xs:date"/>
+                        <xs:element name="TEAMID" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-        <COMPETITION>
-            <ID>5</ID>
-            <NAME>National Championship</NAME>
-            <DATE>2026-08-20</DATE>
-            <TEAMID>1</TEAMID>
-        </COMPETITION>
+    <!-- BOOKINGS -->
+    <xs:complexType name="BookingsType">
+        <xs:sequence>
+            <xs:element name="BOOKING" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ID" type="xs:int"/>
+                        <xs:element name="TRAININGSESSIONID" type="xs:int"/>
+                        <xs:element name="TIME" type="xs:dateTime"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
 
-    </COMPETITIONS>
-
-    <BOOKINGS>
-
-        <BOOKING>
-            <ID>1</ID>
-            <TRAININGSESSIONID>1</TRAININGSESSIONID>
-            <TIME>2026-03-25T07:30:00</TIME>
-        </BOOKING>
-
-        <BOOKING>
-            <ID>2</ID>
-            <TRAININGSESSIONID>2</TRAININGSESSIONID>
-            <TIME>2026-03-26T09:30:00</TIME>
-        </BOOKING>
-
-        <BOOKING>
-            <ID>3</ID>
-            <TRAININGSESSIONID>3</TRAININGSESSIONID>
-            <TIME>2026-03-27T06:30:00</TIME>
-        </BOOKING>
-
-        <BOOKING>
-            <ID>4</ID>
-            <TRAININGSESSIONID>4</TRAININGSESSIONID>
-            <TIME>2026-03-28T08:30:00</TIME>
-        </BOOKING>
-
-        <BOOKING>
-            <ID>5</ID>
-            <TRAININGSESSIONID>5</TRAININGSESSIONID>
-            <TIME>2026-03-29T17:30:00</TIME>
-        </BOOKING>
-
-        <BOOKING>
-            <ID>6</ID>
-            <TRAININGSESSIONID>6</TRAININGSESSIONID>
-            <TIME>2026-03-30T15:30:00</TIME>
-        </BOOKING>
-
-    </BOOKINGS>
-
-</CLUB>
+</xs:schema>
