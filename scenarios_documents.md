@@ -13,13 +13,13 @@
 # Imagine 2 additional scenarios requiring the exploitation of part of the XML database
 # in another XML format and write an XSL stylesheet for this.
 
-### 7
-### 8
+### 7 Goal: Simplified Public Directory
+### 8 Goal: Data Restructuring
 
 # Imagine 2 additional scenarios requiring the exploitation of part of the XML database
 # in JSON format and write an XSL stylesheet for this.
 
-### 9
+### 9 Goal: Team Summaries with Computed Data
 ### 10
 
 # Write a Python program to load an XML file, parse it, validate it against the XML
