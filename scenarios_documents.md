@@ -6,9 +6,9 @@
 ### 1. Goal: Compare how many members each team has, count members per team
 ### 2. Goal: Understand membership levels (GOLD, SILVER, BRONZE), total count of each membership type
 ### 3. Goal: Show each team with its coach name
-### 4
-### 5
-### 6
+### 4  Goal: A user want to see a full training schedule including team/faculty name, equipments, date & time 
+### 5  Goal: A user want to see upcoming competitions ordered by time 
+### 6  Goal: A user wants to see a facility usage report consisiting of facility informations, general booking details
 
 # Imagine 2 additional scenarios requiring the exploitation of part of the XML database
 # in another XML format and write an XSL stylesheet for this.
