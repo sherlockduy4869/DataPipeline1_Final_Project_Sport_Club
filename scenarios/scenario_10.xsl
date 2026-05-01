@@ -1,51 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-Scenario 10:
-Export training sessions into JSON format.
-For each session:
-- ID
-- TIME
-- TEAM NAME
-- COACH NAME (via MES idref)
-- FACILITY NAME
+     ========================================================
+     SCENARIO 10
+     ========================================================
+     Purpose:
+     Export TRAINING SESSIONS from XML database into JSON format.
+     
+     For each training session, we extract:
+     - Session ID
+     - Date & Time
+     - Team Name (linked via TEAMID)
+     - Facility Name (linked via FACILITYID)
+     
+     This demonstrates:
+     - XPath navigation
+     - Cross-entity referencing
+     - JSON-like output generation using XSLT 1.0
+     ========================================================
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-
-    <xsl:output method="text" indent="yes"/>
-
-    <xsl:template match="/">
-
-{
-  "sessions": [
-<xsl:for-each select="CLUB/TRAININGSESSIONS/TRAININGSESSION">
-
-    <xsl:variable name="teamId" select="TEAMID"/>
-    <xsl:variable name="facilityId" select="FACILITYID"/>
-
-    <!-- Find TEAM -->
-    <xsl:variable name="team" select="/CLUB/TEAMS/TEAM[ID = $teamId]"/>
-
-    <!-- Find COACH via MES -->
-    <xsl:variable name="coachId" select="$team/MES/@idref"/>
-    <xsl:variable name="coach" select="/CLUB/COACHES/COACH[@id = $coachId]"/>
-
-    <!-- Find FACILITY -->
-    <xsl:variable name="facility" select="/CLUB/FACILITIES/FACILITY[ID = $facilityId]"/>
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0">
+  
+  <!-- Output as plain text because XSLT 1.0 has no JSON mode -->
+  <xsl:output method="text" encoding="UTF-8"/>
+  
+  <!-- Root template: start transformation from document root -->
+  <xsl:template match="/">
+    
     {
-      "id": "<xsl:value-of select="ID"/>",
+    "sessions": [
+    
+    <!-- Loop through all training sessions in the CLUB -->
+    <xsl:for-each select="CLUB/TRAININGSESSIONS/TRAININGSESSION">
+      
+      <!--
+           VARIABLES:
+           We retrieve related data using XPath relationships
+           instead of duplicating information.
+      -->
+      
+      <!-- Get corresponding TEAM node using TEAMID -->
+      <xsl:variable name="team"
+        select="/CLUB/TEAMS/TEAM[ID = current()/TEAMID]"/>
+      
+      <!-- Get corresponding FACILITY node using FACILITYID -->
+      <xsl:variable name="facility"
+        select="/CLUB/FACILITIES/FACILITY[ID = current()/FACILITYID]"/>
+      
+      <!-- JSON object for one training session -->
+      {
+      "sessionId": "<xsl:value-of select="ID"/>",
       "time": "<xsl:value-of select="TIME"/>",
       "team": "<xsl:value-of select="$team/NAME"/>",
-      "coach": "<xsl:value-of select="$coach/NAME"/>",
       "facility": "<xsl:value-of select="$facility/NAME"/>"
-    }<xsl:if test="position() != last()">,</xsl:if>
-
-</xsl:for-each>
-  ]
-}
-
-    </xsl:template>
-
+      }
+      
+      <!-- Add comma between JSON objects except last one -->
+      <xsl:if test="position() != last()">,</xsl:if>
+      
+    </xsl:for-each>
+    
+    ]
+    }
+    
+  </xsl:template>
+  
 </xsl:stylesheet>
