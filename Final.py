@@ -17,7 +17,8 @@ import os
 # PROJECT DIRECTORY CONFIGURATION
 # ------------------------------------------------------------
 # Base directory of the project
-BASE_DIR = r"c:\Dell\All Documents\University\DSTI\DataPipeline 1\DataPipeline1_Final_Project_Sport_Club"
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+print(BASE_DIR)
 
 # Input XML and XSD files
 XML_FILE = os.path.join(BASE_DIR, "sport_club.xml")
