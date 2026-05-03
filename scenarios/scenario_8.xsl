@@ -3,13 +3,21 @@
 
 <xsl:template match="/">
   <teamsHierarchy>
-    <xsl:for-each select="sportsClub/teams/team">
-      <xsl:variable name="tId" select="@id"/>
+    <xsl:for-each select="CLUB/TEAMS/TEAM">
+      <xsl:variable name="tId" select="ID"/>
       <team>
-        <name><xsl:value-of select="name"/></name>
+        <id><xsl:value-of select="$tId"/></id>
+        <name><xsl:value-of select="NAME"/></name>
+        <coachId><xsl:value-of select="MES/@idref"/></coachId>
         <roster>
-          <!-- This copies the full XML node of any member matching this team -->
-          <xsl:copy-of select="/sportsClub/members/member[@teamId=$tId]"/>
+          <xsl:for-each select="MEMBERS/MEMBER">
+            <member>
+              <id><xsl:value-of select="ID"/></id>
+              <name><xsl:value-of select="NAME"/></name>
+              <email><xsl:value-of select="EMAIL"/></email>
+              <membership><xsl:value-of select="MEMBERSHIPS"/></membership>
+            </member>
+          </xsl:for-each>
         </roster>
       </team>
     </xsl:for-each>

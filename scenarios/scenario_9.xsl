@@ -4,13 +4,12 @@
 <xsl:template match="/">
 {
   "teamsSummary": [
-    <xsl:for-each select="sportsClub/teams/team">
-      <xsl:variable name="tId" select="@id"/>
+    <xsl:for-each select="CLUB/TEAMS/TEAM">
       {
-        "teamId": "<xsl:value-of select="@id"/>",
-        "teamName": "<xsl:value-of select="name"/>",
-        "coachId": "<xsl:value-of select="@coachID"/>",
-        "totalMembers": <xsl:value-of select="count(/sportsClub/members/member[@teamId=$tId])"/>
+        "teamId": <xsl:value-of select="ID"/>,
+        "teamName": "<xsl:value-of select="NAME"/>",
+        "coachId": <xsl:value-of select="MES/@idref"/>,
+        "totalMembers": <xsl:value-of select="count(MEMBERS/MEMBER)"/>
       }<xsl:if test="position() != last()">,</xsl:if>
     </xsl:for-each>
   ]
