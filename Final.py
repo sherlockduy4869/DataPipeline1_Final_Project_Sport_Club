@@ -17,8 +17,7 @@ import os
 # PROJECT DIRECTORY CONFIGURATION
 # ------------------------------------------------------------
 # Base directory of the project
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-print(BASE_DIR)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Input XML and XSD files
 XML_FILE = os.path.join(BASE_DIR, "sport_club.xml")
@@ -73,26 +72,35 @@ def validate_xml(xml_path, xsd_path):
 # ------------------------------------------------------------
 def apply_xslt(xml_doc, xslt_path, output_path):
     """
-    Applies an XSLT transformation to an XML document.
-
-    Args:
-        xml_doc (etree.ElementTree): Parsed XML document
-        xslt_path (str): Path to XSLT file
-        output_path (str): Path to save transformation result
+    Apply XSL transformation
+    and save HTML/XML/JSON output.
     """
 
-    # Load XSLT stylesheet
-    with open(xslt_path, "rb") as xslt_file:
-        xslt_root = etree.XML(xslt_file.read())
-        transform = etree.XSLT(xslt_root)
+    xslt_doc = etree.parse(xslt_path)
+    transform = etree.XSLT(xslt_doc)
 
-    # Apply transformation
     result = transform(xml_doc)
 
-    # Save output result
+    # Save transformation result
     with open(output_path, "wb") as output_file:
-        output_file.write(etree.tostring(result, pretty_print=True, encoding="utf-8"))
 
+        # HTML/XML outputs
+        if result.getroot() is not None:
+
+            output_file.write(
+                etree.tostring(
+                    result,
+                    pretty_print=True,
+                    encoding="utf-8"
+                )
+            )
+
+        # TEXT outputs (JSON)
+        else:
+
+            output_file.write(
+                str(result).encode("utf-8")
+            )
 
 # ------------------------------------------------------------
 # FUNCTION: RUN A SCENARIO
