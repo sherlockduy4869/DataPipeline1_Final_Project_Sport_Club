@@ -61,50 +61,58 @@
 
     <!-- TEAMS -->
     <xs:complexType name="TeamsType">
-        <xs:sequence>
-            <xs:element name="TEAM" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="ID" type="xs:int"/>
-                        <xs:element name="COACHID" type="xs:int"/>
-                        <xs:element name="NAME" type="xs:string"/>
-                        <xs:element name="MEMBERS">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="MEMBER" maxOccurs="unbounded">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="ID" type="xs:int"/>
-                                                <xs:element name="NAME" type="xs:string"/>
-                                                <xs:element name="AGE" minOccurs="0">
-                                                    <xs:simpleType>
-                                                        <xs:restriction base="xs:int">
-                                                            <xs:minInclusive value="15"/>
-                                                            <xs:maxInclusive value="60"/>
-                                                        </xs:restriction>
-                                                    </xs:simpleType>
-                                                </xs:element>
-                                                <xs:element name="EMAIL" type="xs:string"/>
-                                                <xs:element name="MEMBERSHIPS">
-                                                    <xs:simpleType>
-                                                        <xs:restriction base="xs:string">
-                                                            <xs:enumeration value="GOLD"/>
-                                                            <xs:enumeration value="SILVER"/>
-                                                            <xs:enumeration value="BRONZE"/>
-                                                        </xs:restriction>
-                                                    </xs:simpleType>
-                                                </xs:element>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:sequence>
+        <xs:element name="TEAM" maxOccurs="unbounded">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="ID" type="xs:int"/>
+
+                    <!-- UPDATED PART -->
+                    <xs:element name="REF">
+                        <xs:complexType>
+                            <xs:attribute name="idCoach" type="xs:int" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+
+                    <xs:element name="NAME" type="xs:string"/>
+                    <xs:element name="MEMBERS">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="MEMBER" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="ID" type="xs:int"/>
+                                            <xs:element name="NAME" type="xs:string"/>
+                                            <xs:element name="AGE" minOccurs="0">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:int">
+                                                        <xs:minInclusive value="15"/>
+                                                        <xs:maxInclusive value="60"/>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
+                                            <xs:element name="EMAIL" type="xs:string"/>
+                                            <xs:element name="MEMBERSHIPS">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="GOLD"/>
+                                                        <xs:enumeration value="SILVER"/>
+                                                        <xs:enumeration value="BRONZE"/>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:sequence>
+</xs:complexType>
 
     <!-- COACHES -->
     <xs:complexType name="CoachesType">
