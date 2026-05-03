@@ -2,7 +2,8 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     
-    <!-- ROOT -->
+    <!-- ROOT: top-level container grouping all club entities and
+         declaring the keys/keyrefs that link them. -->
     <xs:element name="CLUB">
         <xs:complexType>
             <xs:sequence>
@@ -59,7 +60,9 @@
 
     </xs:element>
 
-    <!-- TEAMS -->
+    <!-- TEAMS: list of teams with their MEMBERS (GOLD/SILVER/BRONZE).
+         REF/@idCoach -> COACH.ID; also referenced by TRAINING and
+         COMPETITIONS via TEAMID. -->
     <xs:complexType name="TeamsType">
     <xs:sequence>
         <xs:element name="TEAM" maxOccurs="unbounded">
@@ -114,7 +117,8 @@
     </xs:sequence>
 </xs:complexType>
 
-    <!-- COACHES -->
+    <!-- COACHES: club coaches (ID, NAME, SPECIALTY).
+         Referenced by TEAMS via REF/@idCoach (one coach -> many teams). -->
     <xs:complexType name="CoachesType">
         <xs:sequence>
             <xs:element name="COACH" maxOccurs="unbounded">
@@ -129,7 +133,8 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- FACILITIES -->
+    <!-- FACILITIES: club venues (NAME, LOCATION, CAPACITY).
+         Referenced by TRAINING via FACILITYID (one facility -> many sessions). -->
     <xs:complexType name="FacilitiesType">
         <xs:sequence>
             <xs:element name="FACILITY" maxOccurs="unbounded">
@@ -145,7 +150,8 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- TRAINING -->
+    <!-- TRAINING: sessions linking a TEAM and a FACILITY at a given TIME.
+         TEAMID -> TEAM.ID, FACILITYID -> FACILITY.ID; referenced by BOOKINGS. -->
     <xs:complexType name="TrainingSessionsType">
         <xs:sequence>
             <xs:element name="TRAININGSESSION" maxOccurs="unbounded">
@@ -168,7 +174,8 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- COMPETITIONS -->
+    <!-- COMPETITIONS: matches with NAME, DATE and the participating TEAMID.
+         TEAMID logically -> TEAM.ID (not enforced by a keyref). -->
     <xs:complexType name="CompetitionsType">
         <xs:sequence>
             <xs:element name="COMPETITION" maxOccurs="unbounded">
@@ -184,7 +191,8 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- BOOKINGS -->
+    <!-- BOOKINGS: reservations for training sessions (ID, TIME).
+         TRAININGSESSIONID -> TRAININGSESSION.ID (one session -> many bookings). -->
     <xs:complexType name="BookingsType">
         <xs:sequence>
             <xs:element name="BOOKING" maxOccurs="unbounded">

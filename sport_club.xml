@@ -3,13 +3,20 @@
 <CLUB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="sport_club.xsd">
 
+    <!-- TEAMS: container holding all teams that belong to the club -->
     <TEAMS>
 
+        <!-- TEAM: a single team within the club -->
         <TEAM>
+            <!-- Unique identifier of the team -->
             <ID>1</ID>
+            <!-- Reference to the COACH (by ID) who is in charge of this team -->
             <REF idCoach="1"/>
+            <!-- Display name of the team -->
             <NAME>Team A</NAME>
+            <!-- MEMBERS: list of players/members enrolled in this team -->
             <MEMBERS>
+                <!-- MEMBER: one member with personal info and membership tier (GOLD / SILVER / BRONZE) -->
                 <MEMBER><ID>1</ID><NAME>Duy</NAME><AGE>18</AGE><EMAIL>duy1@gmail.com</EMAIL><MEMBERSHIPS>GOLD</MEMBERSHIPS></MEMBER>
                 <MEMBER><ID>2</ID><NAME>Linh</NAME><AGE>19</AGE><EMAIL>linh1@gmail.com</EMAIL><MEMBERSHIPS>SILVER</MEMBERSHIPS></MEMBER>
                 <MEMBER><ID>3</ID><NAME>Quan</NAME><AGE>20</AGE><EMAIL>quan1@gmail.com</EMAIL><MEMBERSHIPS>BRONZE</MEMBERSHIPS></MEMBER>
@@ -63,7 +70,9 @@
 
     </TEAMS>
 
+    <!-- COACHES: container holding all coaches available in the club -->
     <COACHES>
+        <!-- COACH: one coach with a unique ID, name, and the SPECIALTY (sport) they train -->
         <COACH><ID>1</ID><NAME>Vu Anh</NAME><SPECIALTY>Football</SPECIALTY></COACH>
         <COACH><ID>2</ID><NAME>Anh Vu</NAME><SPECIALTY>Basketball</SPECIALTY></COACH>
         <COACH><ID>3</ID><NAME>Nguyen Hai</NAME><SPECIALTY>Volleyball</SPECIALTY></COACH>
@@ -76,16 +85,24 @@
         <COACH><ID>10</ID><NAME>Dang Phuc</NAME><SPECIALTY>Badminton</SPECIALTY></COACH>
     </COACHES>
 
+    <!-- TRAININGSESSIONS: container holding all scheduled training sessions -->
     <TRAININGSESSIONS>
 
+        <!-- TRAININGSESSION: one practice session linking a team to a facility at a given time -->
         <TRAININGSESSION>
+            <!-- Unique identifier of the training session -->
             <ID>1</ID>
+            <!-- Reference to the TEAM (by ID) that attends this session -->
             <TEAMID>1</TEAMID>
+            <!-- Reference to the FACILITY (by ID) where the session takes place -->
             <FACILITYID>1</FACILITYID>
+            <!-- EQUIPMENTS: list of equipment items required for this session -->
             <EQUIPMENTS>
+                <!-- EQUIPMENT: a single piece of gear used during the session -->
                 <EQUIPMENT>Football</EQUIPMENT>
                 <EQUIPMENT>Goal Net</EQUIPMENT>
             </EQUIPMENTS>
+            <!-- Date and time when the session starts (ISO 8601 format) -->
             <TIME>2026-03-25T08:00:00</TIME>
         </TRAININGSESSION>
 
@@ -146,7 +163,9 @@
 
     </TRAININGSESSIONS>
 
+    <!-- FACILITIES: container holding all venues owned/used by the club -->
     <FACILITIES>
+        <!-- FACILITY: one venue with a unique ID, name, location, and maximum CAPACITY -->
         <FACILITY><ID>1</ID><NAME>Stadium A</NAME><LOCATION>Hanoi</LOCATION><CAPACITY>500</CAPACITY></FACILITY>
         <FACILITY><ID>2</ID><NAME>Gym B</NAME><LOCATION>Ho Chi Minh City</LOCATION><CAPACITY>200</CAPACITY></FACILITY>
         <FACILITY><ID>3</ID><NAME>Pool C</NAME><LOCATION>Da Nang</LOCATION><CAPACITY>150</CAPACITY></FACILITY>
@@ -155,12 +174,18 @@
         <FACILITY><ID>6</ID><NAME>Sports Hall F</NAME><LOCATION>Nha Trang</LOCATION><CAPACITY>300</CAPACITY></FACILITY>
     </FACILITIES>
 
+    <!-- COMPETITIONS: container holding all competitions/tournaments the club participates in -->
     <COMPETITIONS>
 
+        <!-- COMPETITION: one event with a name, date, and the participating team (TEAMID reference) -->
         <COMPETITION>
+            <!-- Unique identifier of the competition -->
             <ID>1</ID>
+            <!-- Display name of the competition -->
             <NAME>Summer Cup</NAME>
+            <!-- Scheduled date of the competition -->
             <DATE>2026-06-01</DATE>
+            <!-- Reference to the TEAM (by ID) taking part -->
             <TEAMID>1</TEAMID>
         </COMPETITION>
 
@@ -194,11 +219,16 @@
 
     </COMPETITIONS>
 
+    <!-- BOOKINGS: container holding facility/session reservations -->
     <BOOKINGS>
 
+        <!-- BOOKING: one reservation tied to a specific training session -->
         <BOOKING>
+            <!-- Unique identifier of the booking -->
             <ID>1</ID>
+            <!-- Reference to the TRAININGSESSION (by ID) being booked -->
             <TRAININGSESSIONID>1</TRAININGSESSIONID>
+            <!-- Date and time the booking is reserved for (typically just before the session starts) -->
             <TIME>2026-03-25T07:30:00</TIME>
         </BOOKING>
 
